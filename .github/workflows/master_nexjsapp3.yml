@@ -51,7 +51,7 @@ jobs:
 # Add 2022.4.8 By MM
       - name: unzip artifact for deployment
         run: unzip release.zip 
-            rm release.zip
+            
         
   #
       - name: 'Deploy to Azure Web App'
