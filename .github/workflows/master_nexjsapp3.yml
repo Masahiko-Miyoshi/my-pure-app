@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
+          cache: 'npm' # Add By MM to fast
 
       - name: npm install, build, and test
         run: |
@@ -28,7 +29,7 @@ jobs:
           npm run test --if-present
 # Add 2022.4.8 By MM
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./* -x "node_modules/*"
+        run: zip -r release.zip ./*
  # 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -49,11 +50,9 @@ jobs:
         with:
           name: node-app
 # Add 2022.4.8 By MM
-      - name: unzip artifact for deployment
-        run: unzip release.zip 
-            
-        
-  #
+#     - name: unzip artifact for deployment
+#       run: unzip release.zip                 
+#
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -61,4 +60,5 @@ jobs:
           app-name: 'NexjsApp3'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_04265C25BFC241CEBE565C1F1EE71857 }}
-          package: .
+          #package: .
+          package: release.zip
