@@ -20,7 +20,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-          cache: 'npm' # Add By MM to fast
 
       - name: npm install, build, and test
         run: |
@@ -29,7 +28,7 @@ jobs:
           npm run test --if-present
 # Add 2022.4.8 By MM
       - name: Zip artifact for deployment
-        run: zip -r release.zip * .vscode .deployment .eslintrc.json .github .next
+        run: zip -r release.zip * .vscode .github .next .eslintrc.json .deployment
  # 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
